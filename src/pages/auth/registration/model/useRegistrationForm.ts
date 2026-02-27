@@ -1,7 +1,5 @@
-import { useState } from "react";
-
+import { useRegister } from "@entities/session";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authApi, setToken } from "@shared/api";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +7,7 @@ import { RegistrationFormData, registrationSchema } from "../lib/validation";
 
 export const useRegistrationForm = () => {
   const navigate = useNavigate();
-  const [apiError, setApiError] = useState<string | null>(null);
+  const mutation = useRegister();
 
   const {
     register,
@@ -20,17 +18,9 @@ export const useRegistrationForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: RegistrationFormData) => {
-    try {
-      setApiError(null);
-      const { confirmPassword: _confirmPassword, ...rest } = data;
-      const result = await authApi.register(rest);
-      setToken(result.data.access_token);
-      navigate("/");
-    } catch (err) {
-      const error = err as { response?: { data?: { message?: string } } };
-      setApiError(error.response?.data?.message || "Ошибка при регистрации");
-    }
+  const onSubmit = (data: RegistrationFormData) => {
+    const { confirmPassword: _confirmPassword, ...rest } = data;
+    mutation.mutate(rest, { onSuccess: () => navigate("/") });
   };
 
   return {
@@ -38,6 +28,6 @@ export const useRegistrationForm = () => {
     handleSubmit,
     onSubmit,
     errors,
-    apiError,
+    mutation,
   };
 };

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useLoginForm } from "../model/useLoginForm";
 
 const LoginPage = () => {
-  const { register, handleSubmit, onSubmit, errors, apiError } = useLoginForm();
+  const { register, handleSubmit, onSubmit, errors, mutation } = useLoginForm();
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {apiError && <p style={{ color: "red" }}>{apiError}</p>}
+        {mutation.isError && <p style={{ color: "red" }}>Ошибка при входе</p>}
         <input type="email" placeholder="Email" {...register("email")} />
         {errors.email?.message}
         <input

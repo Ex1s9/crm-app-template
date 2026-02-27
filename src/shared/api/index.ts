@@ -24,6 +24,7 @@ api.interceptors.request.use((config) => {
 });
 
 export { getToken, setToken, removeToken } from "./token";
+export type { AuthResponse, LoginRequest, RegistrationRequest } from "./types";
 
 export const authApi = {
   register: (data: RegistrationRequest) =>

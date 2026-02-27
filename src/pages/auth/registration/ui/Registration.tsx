@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 import { useRegistrationForm } from "../model/useRegistrationForm";
 
 const RegistrationForm = () => {
-  const { register, handleSubmit, onSubmit, errors, apiError } =
+  const { register, handleSubmit, onSubmit, errors, mutation } =
     useRegistrationForm();
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {apiError && <p style={{ color: "red" }}>{apiError}</p>}
+        {mutation.isError && (
+          <p style={{ color: "red" }}>Ошибка при регистрации</p>
+        )}
         <Input
           label="First Name"
           id="firstName"

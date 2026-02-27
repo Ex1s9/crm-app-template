@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { taskApi } from "../api";
+import { taskKeys } from "./queryKeys";
 
 export const useDeleteTask = (id: number) => {
   const queryClient = useQueryClient();
@@ -8,7 +9,7 @@ export const useDeleteTask = (id: number) => {
   return useMutation({
     mutationFn: () => taskApi.deleteTask(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: taskKeys.all });
     },
   });
 };

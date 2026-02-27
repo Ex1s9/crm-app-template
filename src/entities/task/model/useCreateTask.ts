@@ -4,11 +4,11 @@ import { taskApi } from "../api";
 import { taskKeys } from "./queryKeys";
 import { CreateTaskRequest } from "./types";
 
-export const useUpdateTask = (id: number) => {
+export const useCreateTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateTaskRequest) => taskApi.updateTask(id, data),
+    mutationFn: (data: CreateTaskRequest) => taskApi.createTask(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
     },

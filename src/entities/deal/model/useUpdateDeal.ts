@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { dealApi } from "../api";
+import { dealKeys } from "./queryKeys";
 import { CreateDealBody } from "./types";
 
 export const useUpdateDeal = (id: number) => {
@@ -9,7 +10,7 @@ export const useUpdateDeal = (id: number) => {
   return useMutation({
     mutationFn: (data: Partial<CreateDealBody>) => dealApi.updateDeal(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["deals"] });
+      queryClient.invalidateQueries({ queryKey: dealKeys.all });
     },
   });
 };

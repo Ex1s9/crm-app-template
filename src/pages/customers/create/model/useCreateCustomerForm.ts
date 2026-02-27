@@ -1,6 +1,5 @@
-import { customerApi } from "@entities/customer";
+import { useCreateCustomer } from "@entities/customer";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +10,7 @@ import {
 
 export const useCreateCustomerForm = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const mutation = useCreateCustomer();
 
   const {
     register,
@@ -22,16 +21,8 @@ export const useCreateCustomerForm = () => {
     mode: "onChange",
   });
 
-  const mutation = useMutation({
-    mutationFn: (data: CreateCustomerFormData) =>
-      customerApi.createCustomer(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["customers"] });
-      navigate("/");
-    },
-  });
-
-  const onSubmit = (data: CreateCustomerFormData) => mutation.mutate(data);
+  const onSubmit = (data: CreateCustomerFormData) =>
+    mutation.mutate(data, { onSuccess: () => navigate("/") });
 
   return {
     register,

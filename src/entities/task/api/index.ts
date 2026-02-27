@@ -1,18 +1,13 @@
 import { api } from "@shared/api";
 
-import {
-  CreateTaskRequest,
-  GetTasks,
-  Task,
-  UpdateTasksById,
-} from "../model/types";
+import { CreateTaskDTO, GetTasksDTO, TaskDTO, UpdateTaskDTO } from "./types";
 
 export const taskApi = {
-  getTasks: () => api.get<GetTasks>("/api/tasks"),
-  getTaskById: (id: number) => api.get<Task>(`/api/tasks/${id}`),
-  createTask: (data: CreateTaskRequest) =>
-    api.post<UpdateTasksById>("/api/tasks", data),
-  updateTask: (id: number, data: CreateTaskRequest) =>
-    api.put<UpdateTasksById>(`/api/tasks/${id}`, data),
+  getTasks: () => api.get<GetTasksDTO>("/api/tasks"),
+  getTaskById: (id: number) => api.get<TaskDTO>(`/api/tasks/${id}`),
+  createTask: (data: CreateTaskDTO) =>
+    api.post<UpdateTaskDTO>("/api/tasks", data),
+  updateTask: (id: number, data: CreateTaskDTO) =>
+    api.put<UpdateTaskDTO>(`/api/tasks/${id}`, data),
   deleteTask: (id: number) => api.delete(`/api/tasks/${id}`),
 };

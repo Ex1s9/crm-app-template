@@ -1,12 +1,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { dealApi } from "../api";
+import { dealKeys } from "./queryKeys";
 
 const LIMIT = 10;
 
 export const useDealsInfinite = () =>
   useInfiniteQuery({
-    queryKey: ["deals", "infinite"],
+    queryKey: dealKeys.infinite,
     queryFn: ({ pageParam }) =>
       dealApi.getDeals({ page: pageParam, limit: LIMIT }),
     initialPageParam: 1,

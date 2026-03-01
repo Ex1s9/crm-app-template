@@ -7,8 +7,9 @@ export { useDealById } from "./model/useDealById";
 export { useProgressOptions } from "./model/useProgressOptions";
 export type {
   Deal,
+  DealDetail,
   GetDeals,
-  GetDealsById,
+  GetDealById,
   ProgressOption,
   GetProgressDeal,
   CreateDealBody,

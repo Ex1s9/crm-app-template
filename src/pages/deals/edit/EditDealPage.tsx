@@ -21,7 +21,7 @@ const EditDealPage = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading deal</div>;
 
-  const deal = data?.data.deals;
+  const deal = data;
 
   return (
     <div>
@@ -29,7 +29,7 @@ const EditDealPage = () => {
       {mutation.isError && <p>Error updating deal</p>}
       <DealForm
         defaultValues={{
-          customer: deal?.customer,
+          customer: deal?.customer?.id,
           address_city: deal?.address_city,
           address_state: deal?.address_state,
           address_street: deal?.address_street,

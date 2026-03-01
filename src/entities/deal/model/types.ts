@@ -1,9 +1,10 @@
 export type {
-  DealDTO as Deal,
-  GetDealsDTO as GetDeals,
-  UpdateDealDTO as UpdateDeal,
-  GetDealByIdDTO as GetDealsById,
-  ProgressOptionDTO as ProgressOption,
-  GetProgressDealDTO as GetProgressDeal,
   CreateDealDTO as CreateDealBody,
+  DealDTO as Deal,
+  DealDetailDTO as DealDetail,
+  GetDealByIdDTO as GetDealById,
+  GetDealsDTO as GetDeals,
+  GetProgressDealDTO as GetProgressDeal,
+  ProgressOptionDTO as ProgressOption,
+  UpdateDealDTO as UpdateDeal,
 } from "../api/types";

@@ -28,8 +28,26 @@ export type UpdateDealDTO = {
   deal: DealDTO;
 };
 
+export type EmbeddedCustomer = {
+  id: number;
+  avatar: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  owner: number;
+};
+
+export type DealDetailDTO = Omit<DealDTO, "customer"> & {
+  customer?: EmbeddedCustomer;
+};
+
 export type GetDealByIdDTO = {
-  deals: DealDTO;
+  deal: DealDetailDTO;
 };
 
 export type ProgressOptionDTO = {
